@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-07-01 11:50:44
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-04-05 18:09:21
+-- @Last Modified time: 2025-04-06 15:24:14
 
 local 角色处理类 = class()
 local jnzbzz = require("script/角色处理类/技能类")
@@ -4472,7 +4472,15 @@ function 角色处理类:取战斗属性()
 			end
 		end
 	end
-
+	local 修身 = 0
+	if self.门派=="五庄观" and self.奇经八脉.修身==1 then
+		修身 = 14
+	end
+	fhsj.体质=self.体质 + self.装备属性.体质+修身+self.坐骑属性.体质+self.动物套属性.体质
+	fhsj.魔力=self.魔力 + self.装备属性.魔力+修身+self.坐骑属性.魔力+self.动物套属性.魔力
+	fhsj.力量=self.力量 + self.装备属性.力量+修身+self.坐骑属性.力量+self.动物套属性.力量
+	fhsj.耐力=self.耐力 + self.装备属性.耐力+修身+self.坐骑属性.耐力+self.动物套属性.耐力
+	fhsj.敏捷=self.敏捷 + self.装备属性.敏捷+修身+self.坐骑属性.敏捷+self.动物套属性.敏捷
 	fhsj.装备 = self:取装备数据()
 	fhsj.灵饰 = self:取灵饰数据()
 	fhsj.锦衣 = self:取锦衣数据()

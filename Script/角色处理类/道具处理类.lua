@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-11-14 12:45:49
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-04-06 02:57:18
+-- @Last Modified time: 2025-04-06 15:38:17
 -- @Author: baidwwy
 -- @Date:   2024-11-14 12:45:49
 -- @Last Modified by:   baidwwy
@@ -9428,6 +9428,9 @@ function 道具处理类:取五宝()
 end
 
 function 道具处理类:灵饰处理(id,名称,等级,强化,类型)
+	if 等级 == nil then
+		return
+	end
 	local 临时道具 =物品类()
 	临时道具:置对象(名称)
 	临时道具.级别限制 = 等级

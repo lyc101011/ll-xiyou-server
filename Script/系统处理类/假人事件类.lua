@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-07-01 11:50:44
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-04-06 03:03:28
+-- @Last Modified time: 2025-04-06 15:39:45
 local 假人事件类 = class()
 local insert = table.insert
 function 假人事件类:初始化()
@@ -610,6 +610,8 @@ function 假人事件类:摊位上架(数字id)
 			玩家数据[数字id].摊位数据.道具[i]=table.copy(装备处理类:生成打造装备假人(数字id,等级*10,取装备序列1(名称),名称,"强化打造",玩家数据[数字id].角色.名称.."打造",nil,nil,nil,nil,1))
 			玩家数据[数字id].摊位数据.道具[i].价格=(等级*10)^2*6500*取随机数(95,105)/1000
 		elseif 名称 =="未鉴定灵饰" then
+			local 等级范围={10,12,14}
+			local 等级=等级范围[取随机数(1,#等级范围)]----
 			local 部位=随机灵饰[取随机数(1,#随机灵饰)]
 			local 名称=制造装备[部位][等级]
 			玩家数据[数字id].摊位数据.道具[i] = 玩家数据[数字id].道具:灵饰处理(数字id,名称,等级,3,部位)
