@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-10-15 01:51:56
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-01-03 21:58:27
+-- @Last Modified time: 2025-04-06 19:49:45
 -- @Author: baidwwy
 -- @Date:   2024-08-21 11:47:39
 -- @Last Modified by:   baidwwy
@@ -656,7 +656,17 @@ function 场景类_NPC对话处理:公共处理(id,数字id,序号,内容)
 				常规提示(数字id,"您的"..强化石[消耗石头].."不足，无法进行点化。")
 				return true
 			end
-			玩家数据[数字id].道具.数据[宝珠id] = nil
+			local 数量 = 玩家数据[数字id].道具.数据[宝珠id].数量
+			if 数量 < 1 then
+				常规提示(id,"道具数据异常，请重新打开界面进行操作。")
+				return true
+			end
+			数量 = 数量 -1
+			if 数量 < 1 then
+				玩家数据[数字id].道具.数据[宝珠id] = nil
+			else
+				玩家数据[数字id].道具.数据[宝珠id].数量 = 数量
+			end
 			if 玩家数据[数字id].道具:消耗背包道具(连接id,数字id,强化石数据[1],强化石数据[2]) then
 				发送数据(玩家数据[数字id].连接id,3718)
 				if 套装类型 == 1 then
