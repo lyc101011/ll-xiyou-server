@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-07-01 11:50:44
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2024-12-13 13:07:46
+-- @Last Modified time: 2025-04-12 03:13:01
 -- @Author: baidwwy
 -- @Date:   2024-05-23 06:02:27
 -- @Last Modified by:   baidwwy
@@ -816,7 +816,7 @@ function 召唤兽处理类:合宠处理(连接id,序号,id,内容)
 		道具格子=内容.合宠材料.道具格子
 	end
 
-	local 材料数量=1
+	local 材料数量=0
 	local 技能最大数量=24
 	-- print(玩家数据[id].道具.数据[玩家数据[id].角色.道具[道具格子]].名称)--名称
 	-- print(玩家数据[id].角色.道具[道具格子])--=53
@@ -869,20 +869,16 @@ function 召唤兽处理类:合宠处理(连接id,序号,id,内容)
 			self.数据[bb1]:置新对象(随机模型,随机模型,"宝宝",属性,0,染色方案,技能组,资质组,成长,参战等级,属性表)
 		else
 			if 道具格子~=nil then
-				if  玩家数据[id].道具.数据[玩家数据[id].角色.道具[道具格子]] and 玩家数据[id].道具.数据[玩家数据[id].角色.道具[道具格子]].数量~=nil then
-					材料数量=玩家数据[id].道具.数据[玩家数据[id].角色.道具[道具格子]].数量
-					if 材料数量>1000 then
-						材料数量=1000
-					end
+				if  玩家数据[id].道具.数据[玩家数据[id].角色.道具[道具格子]] and 玩家数据[id].道具.数据[玩家数据[id].角色.道具[道具格子]].数量~=nil and 玩家数据[id].道具.数据[玩家数据[id].角色.道具[道具格子]].名称 =='神兜兜' then
+					材料数量=1
 				end
 			end
-
 			self.数据[bb1].模型=随机模型
 			local pj = 0
 			for n=1,#资质范围 do
 				pj = math.floor((self.数据[bb1][资质范围[n]]+self.数据[bb2][资质范围[n]])/2)
 				if 道具格子~=nil and 材料数量>=1 then
-					self.数据[bb1][资质范围[n]] = math.floor(取随机数(pj*(950+材料数量/10),pj*1050)/1000   )
+					self.数据[bb1][资质范围[n]] = math.floor(取随机数(pj*(950+材料数量*10),pj*1050)/1000   )
 				else
 					self.数据[bb1][资质范围[n]] = math.floor(取随机数(pj*950,pj*1050)/1000)
 				end
@@ -893,12 +889,12 @@ function 召唤兽处理类:合宠处理(连接id,序号,id,内容)
 			--计算成长
 			pj = string.format("%.3f", (self.数据[bb1].成长 + self.数据[bb2].成长)/2)
 			if 道具格子~=nil and 材料数量>1 then
-				self.数据[bb1].成长=GetPreciseDecimal(取随机小数2(pj*(920+材料数量/10), pj*1020)/1000,3)
+				self.数据[bb1].成长=GetPreciseDecimal(取随机小数2(pj*(920+材料数量*10), pj*1020)/1000,3)
 			else
 				self.数据[bb1].成长=GetPreciseDecimal(取随机小数2(pj*920,pj*1020)/1000,3)
 			end
-			if self.数据[bb1].成长>1.3 then
-				self.数据[bb1].成长=1.3
+			if self.数据[bb1].成长>1.5 then
+				self.数据[bb1].成长=1.5
 			end
 			--计算技能
 			local 技能表={}
@@ -914,6 +910,7 @@ function 召唤兽处理类:合宠处理(连接id,序号,id,内容)
 			for n=1,#self.数据[bb1].技能 do
 				技能表[#技能表+1]=self.数据[bb1].技能[n]
 			end
+
 			技能表=删除重复(技能表)
 			for n=1,#技能表 do
 				技能表[n]={名称=技能表[n],排列=取随机数(1,10000)}
@@ -929,7 +926,7 @@ function 召唤兽处理类:合宠处理(连接id,序号,id,内容)
 			if 技能表~={} then
 				for n=1,技能总数 do
 					local 成功几率=100-#self.数据[bb1].技能*4
-					if 取随机数()<=成功几率+材料数量/100 then
+					if 取随机数()<=成功几率+材料数量*3 then
 						self.数据[bb1].技能[#self.数据[bb1].技能+1]=技能表[n].名称
 					end
 				end
@@ -1457,7 +1454,7 @@ function 召唤兽处理类:炼化处理(连接id,序号,id,内容)
 				常规提示(id,"不能对野怪使用！")
 				return
 			else
-				local 吸附概率 = 20
+				local 吸附概率 = 40
 				local 吸附名称 = self.数据[bb].技能[取随机数(1,#self.数据[bb].技能)]
 				if 吸附名称=="须弥真言" or 吸附名称=="观照万象" or 吸附名称=="津津有味" or 吸附名称=="净台妙谛" or 吸附名称=="叱咤风云" or 吸附名称=="无畏布施"
 					or 吸附名称=="风起龙游" or 吸附名称=="神来气旺" or 吸附名称=="出其不意" or 吸附名称=="灵能激发" then

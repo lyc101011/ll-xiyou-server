@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-11-14 12:45:49
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-04-08 00:35:43
+-- @Last Modified time: 2025-04-12 17:45:17
 -- @Author: baidwwy
 -- @Date:   2024-11-14 12:45:49
 -- @Last Modified by:   baidwwy
@@ -621,7 +621,7 @@ function 道具处理类:数据处理(连接id,序号,数字id,数据)
    物品类型 = "打造"
     elseif self.数据[道具id].总类 == 2  then
    物品类型 = "装备"
-   elseif self.数据[道具id].名称 == "飞行符" or self.数据[道具id].名称 =="秘制红罗羹" or self.数据[道具id].名称 =="秘制绿芦羹"  or self.数据[道具id].名称 =="新春飞行符" or self.数据[道具id].名称 =="摄妖香" or self.数据[道具id].名称 =="洞冥草" or self.数据[道具id].名称 =="包子" or self.数据[道具id].名称 =="顺逆神针" then
+   elseif self.数据[道具id].名称 == "飞行符" or self.数据[道具id].名称 == "回梦丹" or self.数据[道具id].名称 =="秘制红罗羹" or self.数据[道具id].名称 =="秘制绿芦羹"  or self.数据[道具id].名称 =="新春飞行符" or self.数据[道具id].名称 =="摄妖香" or self.数据[道具id].名称 =="洞冥草" or self.数据[道具id].名称 =="包子" or self.数据[道具id].名称 =="顺逆神针" then
     物品类型 = "不存仓"
    elseif self.数据[道具id].名称 == "附加专用符"  then
     物品类型 = "不存仓"
@@ -3624,7 +3624,56 @@ elseif 名称=="元素曜石·冰" or 名称=="元素曜石·风"  or 名称=="�
 		end
 		道具使用=true
 	------
-
+		elseif 名称=="精魄灵石灵石礼包-速度" then
+			local 道具格子=玩家数据[id].角色:取道具格子2()
+			if 道具格子<10 then
+				常规提示(id,"背包不足，开启此物品至少需要10个格子")
+				return 0
+			end
+			for i=1,10 do
+    		玩家数据[id].道具:给予道具(id,"精魄灵石",i,'速度')
+			end
+			道具使用=true
+		elseif 名称=="精魄灵石灵石礼包-伤害" then
+			local 道具格子=玩家数据[id].角色:取道具格子2()
+			if 道具格子<10 then
+				常规提示(id,"背包不足，开启此物品至少需要10个格子")
+				return 0
+			end
+			for i=1,10 do
+    		玩家数据[id].道具:给予道具(id,"精魄灵石",i,'伤害')
+			end
+			道具使用=true
+		elseif 名称=="精魄灵石灵石礼包-灵力" then
+			local 道具格子=玩家数据[id].角色:取道具格子2()
+			if 道具格子<10 then
+				常规提示(id,"背包不足，开启此物品至少需要10个格子")
+				return 0
+			end
+			for i=1,10 do
+    		玩家数据[id].道具:给予道具(id,"精魄灵石",i,'灵力')
+			end
+			道具使用=true
+		elseif 名称=="精魄灵石灵石礼包-防御" then
+			local 道具格子=玩家数据[id].角色:取道具格子2()
+			if 道具格子<10 then
+				常规提示(id,"背包不足，开启此物品至少需要10个格子")
+				return 0
+			end
+			for i=1,10 do
+    		玩家数据[id].道具:给予道具(id,"精魄灵石",i,'防御')
+			end
+			道具使用=true
+		elseif 名称=="精魄灵石灵石礼包-气血" then
+			local 道具格子=玩家数据[id].角色:取道具格子2()
+			if 道具格子<10 then
+				常规提示(id,"背包不足，开启此物品至少需要10个格子")
+				return 0
+			end
+			for i=1,10 do
+    		玩家数据[id].道具:给予道具(id,"精魄灵石",i,'气血')
+			end
+			道具使用=true
 	elseif 名称 == "黑宝石max" then
 		local 道具格子=玩家数据[id].角色:取道具格子2()
 		if 道具格子<10 then
@@ -4852,7 +4901,7 @@ function 道具处理类:清灵仙露处理(连接id,id,加血对象,道具id)
 			if 玩家数据[id].召唤兽.数据[加血对象].进阶.灵性 >=100 then
 				临时灵性 = 取随机数(9,10)
 			else
-				临时灵性 = self.数据[道具id].灵气
+				临时灵性 = 取随机数(self.数据[道具id].灵气 - 1,self.数据[道具id].灵气+2)
 			end
 		else
 			local jil = 25
@@ -5253,12 +5302,7 @@ function 道具处理类:法宝补充灵气(连接id,id,编号)
 		添加最后对话(id,"只有法宝才可以补充灵气哟，你这个是什么玩意？")
 		return
 	end
-	local 价格=5000000
-	if self.数据[道具id].分类==2 then
-			价格=8500000
-		elseif self.数据[道具id].分类==3 then
-			价格=15000000
-		end
+	local 价格=500000
 	if 玩家数据[id].角色.银子<价格 then
 		添加最后对话(id,"本次补充法宝灵气需要消耗"..价格.."两银子，你身上没有那么多的现金哟。")
 		return
@@ -6796,10 +6840,10 @@ function 道具处理类:给予道具(id,名称,数量,参数,附加,专用,数�
 		end
 		local 重置id=0
 		for n=1,20 do
-			if 重置id==0 and 玩家数据[id].角色.道具[n] and 数量~=nil and self.数据[玩家数据[id].角色.道具[n]] and self.数据[玩家数据[id].角色.道具[n]].名称==名称 and self.数据[玩家数据[id].角色.道具[n]].数量
-				and 名称 ~= "钨金" and 名称 ~= "元宵" and 名称 ~= "九转金丹" and 名称 ~= "月华露"
-					and self.数据[玩家数据[id].角色.道具[n]].灵气 == 灵性 then
-				if self.数据[玩家数据[id].角色.道具[n]].数量+数量<=99 then
+			if 重置id==0 and 玩家数据[id].角色.道具[n] and 数量~=nil and self.数据[玩家数据[id].角色.道具[n]] and self.数据[玩家数据[id].角色.道具[n]].名称==名称
+				and self.数据[玩家数据[id].角色.道具[n]].数量
+				and 名称 ~= "钨金" and 名称 ~= "元宵" and 名称 ~= "九转金丹" and 名称 ~= "月华露" and not string.find(名称, '召唤兽内丹') and not string.find(名称, '魔兽要诀') then
+				if self.数据[玩家数据[id].角色.道具[n]].数量+数量<=99  then
 					数量=self.数据[玩家数据[id].角色.道具[n]].数量+数量
 					道具id=玩家数据[id].角色.道具[n]
 					识别码=self.数据[玩家数据[id].角色.道具[n]].识别码
@@ -6892,7 +6936,7 @@ function 道具处理类:给予道具(id,名称,数量,参数,附加,专用,数�
 				self.数据[道具id].灵气=灵性
 			end
 
-			self.数据[道具id].可叠加 = true
+			self.数据[道具id].可叠加 = false
 		elseif 名称=="特殊清灵仙露"	then
 			self.数据[道具id].灵气=110
 			self.数据[道具id].可叠加 = true
@@ -7053,11 +7097,43 @@ function 道具处理类:给予道具(id,名称,数量,参数,附加,专用,数�
 		elseif 名称=="百炼精铁" then
 			self.数据[道具id].子类=数量
 		elseif 名称=="精魄灵石" then
-			local sj = 取随机数(1,6)
+			if 参数 ~= nil then
+				sj = 1
+				if 参数 == '速度' then
+					sj =1
+				elseif 参数 =='躲避' then
+					sj =2
+				elseif 参数 == '伤害'then
+					sj =3
+				elseif 参数 == '灵力' then
+					sj =4
+				elseif 参数 == '防御' then
+					sj =5
+				elseif 参数 == '气血' then
+					sj =6
+				end
+				self.数据[道具id].子类=sj --红黄蓝
+				self.数据[道具id].级别限制=数量 or 1
+				self.数据[道具id].特效=参数
+			else
+				local sj = 取随机数(1,6)
+				local 类型={"速度","躲避","伤害","灵力","防御","气血"}
+				self.数据[道具id].子类=sj --红黄蓝
+				self.数据[道具id].级别限制=数量 or 1
+				self.数据[道具id].特效=参数 or 类型[sj]
+			end
+
+			self.数据[道具id].可叠加=false
+		elseif 名称=="精魄灵石灵石礼包-速度" then
+			self.数据[道具id].可叠加=false
+		elseif 名称=="精魄灵石灵石礼包-伤害" then
+			self.数据[道具id].可叠加=false
+		elseif 名称=="精魄灵石灵石礼包-灵力" then
+			self.数据[道具id].可叠加=false
+		elseif 名称=="精魄灵石灵石礼包-防御" then
 			local 类型={"速度","躲避","伤害","灵力","防御","气血"}
-			self.数据[道具id].子类=sj --红黄蓝
-			self.数据[道具id].级别限制=数量 or 1
-			self.数据[道具id].特效=类型[sj]
+			self.数据[道具id].可叠加=false
+		elseif 名称=="精魄灵石灵石礼包-气血" then
 			self.数据[道具id].可叠加=false
 		elseif 名称=="钨金" then-----------------------------------------------------------
 			if 数量==nil then
@@ -7257,6 +7333,7 @@ function 道具处理类:给予道具(id,名称,数量,参数,附加,专用,数�
 		end
 		if self.数据[道具id].名称 then
 			if self.数据[道具id].可叠加 then
+				djflag = false
 				if 数量 == nil then
 					self.数据[道具id].数量=1
 					常规提示(id,"#Y/你获得了 "..self.数据[道具id].名称)
@@ -7285,32 +7362,33 @@ function 道具处理类:给予道具(id,名称,数量,参数,附加,专用,数�
 		-----------------------
 	else
 		  if 消费方式 ~= nil then
-			if 消费<1 then
-				print("玩家id  "..id.."   商城购买物品存在作弊行为！")
-				return false
-			end
-			消费=qz(消费)
-			if 消费方式 == "银子" then
-				if not 玩家数据[id].角色:扣除银子(消费*原始数量,0,0,消费内容,1) then
-					常规提示(id,"你没有那么多的银子")
+				if 消费<1 then
+					print("玩家id  "..id.."   商城购买物品存在作弊行为！")
 					return false
 				end
-			end
-		end
-		local 重置id=0
-		for n=1,20 do
-			  if 重置id==0 and 玩家数据[id].角色.道具[n] and 数量~=nil and self.数据[玩家数据[id].角色.道具[n]] and self.数据[玩家数据[id].角色.道具[n]].名称==名称 and self.数据[玩家数据[id].角色.道具[n]].数量 then
-				if self.数据[玩家数据[id].角色.道具[n]].数量+数量<=99 then
-					self.数据[玩家数据[id].角色.道具[n]].数量= self.数据[玩家数据[id].角色.道具[n]].数量 +数量
-					重置id=1
-					-----------------------武神坛
-					if 玩家数据[id].角色.武神坛角色 then
-						self.数据[玩家数据[id].角色.道具[n]].专用 = id
-						self.数据[玩家数据[id].角色.道具[n]].不可交易=true
+				消费=qz(消费)
+				if 消费方式 == "银子" then
+					if not 玩家数据[id].角色:扣除银子(消费*原始数量,0,0,消费内容,1) then
+						常规提示(id,"你没有那么多的银子")
+						return false
 					end
-					-----------------------
 				end
 			end
+		local 重置id=0
+		for n=1,20 do
+
+			  if 重置id==0 and 玩家数据[id].角色.道具[n] and 数量~=nil and self.数据[玩家数据[id].角色.道具[n]] and self.数据[玩家数据[id].角色.道具[n]].名称==名称 and self.数据[玩家数据[id].角色.道具[n]].数量 then
+					if self.数据[玩家数据[id].角色.道具[n]].数量+数量<=99 then
+						self.数据[玩家数据[id].角色.道具[n]].数量= self.数据[玩家数据[id].角色.道具[n]].数量 +数量
+						重置id=1
+					-----------------------武神坛
+						if 玩家数据[id].角色.武神坛角色 then
+							self.数据[玩家数据[id].角色.道具[n]].专用 = id
+							self.数据[玩家数据[id].角色.道具[n]].不可交易=true
+						end
+					-----------------------
+					end
+				end
 		end
 
 		if 重置id==0 then
@@ -10477,6 +10555,7 @@ function 道具处理类:符纸使用(连接id,id,内容)
 				if self.数据[装备].力量==nil then self.数据[装备].武器神附[8]=0  else self.数据[装备].武器神附[8] = self.数据[装备].力量 + 0 end
 				if self.数据[装备].耐力==nil then self.数据[装备].武器神附[9]=0  else self.数据[装备].武器神附[9] = self.数据[装备].耐力 + 0 end
 				if self.数据[装备].敏捷==nil then self.数据[装备].武器神附[10]=0  else self.数据[装备].武器神附[10] = self.数据[装备].敏捷 + 0 end
+				if self.数据[装备].灵力==nil then self.数据[装备].武器神附[11]=0 else  self.数据[装备].武器神附[11] = self.数据[装备].灵力 + 0 end
 		end
 
 				if self.数据[装备].命中~=nil and self.数据[装备].命中~=0 then  self.数据[装备].命中 = math.floor( self.数据[装备].武器神附[4] * 神附强度 )  end
@@ -10485,7 +10564,8 @@ function 道具处理类:符纸使用(连接id,id,内容)
 				if self.数据[装备].魔力~=nil and self.数据[装备].魔力~=0 then  self.数据[装备].魔力 = math.floor( self.数据[装备].武器神附[7] * 神附强度 )  end
 				if self.数据[装备].力量~=nil and self.数据[装备].力量~=0 then  self.数据[装备].力量 = math.floor( self.数据[装备].武器神附[8] * 神附强度 )  end
 				if self.数据[装备].耐力~=nil and self.数据[装备].耐力~=0 then  self.数据[装备].耐力 = math.floor( self.数据[装备].武器神附[9] * 神附强度 )  end
-				if self.数据[装备].敏捷~=nil and self.数据[装备].敏捷~=0 then  self.数据[装备].敏捷 = math.floor( self.数据[装备].武器神附[10] * 神附强度 )  end
+				if self.数据[装备].敏捷~=nil and self.数据[装备].灵力~=0 then  self.数据[装备].敏捷 = math.floor( self.数据[装备].武器神附[10] * 神附强度 )  end
+				if self.数据[装备].灵力~=nil and self.数据[装备].敏捷~=0 then  self.数据[装备].灵力 = math.floor( self.数据[装备].武器神附[11] * 神附强度 )  end
 			self.数据[装备].武器神附[11]=神附强度
 
 		self:删除道具(连接id,id,"道具",道具id,符纸格子,删除数量)
@@ -12862,9 +12942,6 @@ function 道具处理类:月卡奖励(id)
     玩家数据[id].角色.月卡.生效=false
     常规提示(id,"#Y该会员已到期！")
     return
-  elseif not 玩家数据[id].保持在线 or 玩家数据[id].保持在线<3600 then
-  	常规提示(id,"#Y你需要保持连续在线3600秒才可以领取奖励呦！")
-    return
   end
   if 玩家数据[id].角色.月卡.使用日期 == nil then
     玩家数据[id].角色.月卡.使用日期 = os.date("%d", os.time())
@@ -13802,7 +13879,7 @@ function 道具处理类:给予伙伴道具(id,名称,数量,参数,附加,专�
 			-- 	Linshiwuping.特效 = 参数
 		elseif 名称=="初级清灵仙露" or 名称=="中级清灵仙露" or 名称=="高级清灵仙露" or 名称=="高级摄灵珠" then
 			Linshiwuping.灵气=灵性
-			Linshiwuping.可叠加 = true
+			Linshiwuping.可叠加 = false
 		elseif 名称=="特殊清灵仙露"	then
 			Linshiwuping.灵气=110
 			Linshiwuping.可叠加 = false
@@ -13816,9 +13893,7 @@ function 道具处理类:给予伙伴道具(id,名称,数量,参数,附加,专�
 			Linshiwuping.不可交易 = true
 		elseif 名称=="新春飞行符" then
 			Linshiwuping.可叠加 = false
-			if 数量 and 数量~=999 then
-				Linshiwuping.次数=数量
-			end
+			Linshiwuping.次数=100
 		-- elseif 名称=="自动抓鬼卡" or  名称=="月卡" then
 		-- 	Linshiwuping.可叠加 = false
 		-- 	Linshiwuping.不可交易 = true

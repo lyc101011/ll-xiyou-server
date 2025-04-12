@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-10-20 02:54:08
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-04-06 15:29:38
+-- @Last Modified time: 2025-04-09 00:21:12
 local 战斗技能 = class()
 local jhf = string.format
 local random = math.random
@@ -28,18 +28,8 @@ function 战斗技能:取分灵系数(门派,目标数,等级)
 			end
 		end
 	else
-		if 等级>=150 then
-			if 分灵<=0.6 then
-				分灵 = 0.6
-			end
-		elseif 等级>=125 then
-			if 分灵<=0.57 then
-				分灵 = 0.57
-			end
-		else
-			if 分灵<=0.5 then
-				分灵 = 0.5
-			end
+		if 分灵<=0.6 then
+			分灵 = 0.6
 		end
 	end
 	return 分灵

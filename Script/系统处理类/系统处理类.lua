@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-11-14 12:45:49
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-03-08 11:47:12
+-- @Last Modified time: 2025-04-08 22:00:18
 -- @Author: baidwwy
 -- @Date:   2024-09-08 18:21:27
 -- @Last Modified by:   baidwwy
@@ -1064,15 +1064,20 @@ function 系统处理类:一键强化符(数字id)
     end
 
      if 玩家数据[id]~= nil then
+     		作用装备数=0
+     	  for n=1,6 do
+          if 玩家数据[id].角色.装备[n] ~= nil  then
+            	作用装备数=作用装备数+1
+          end
+        end
+        if 取银子(id) < 银子消耗*作用装备数 then
+        			常规提示(id,"银两不足！".."此次强化"..作用装备数.."件装备，".."需要"..银子消耗*作用装备数.."两")
+        			return
+    		end
+     		玩家数据[id].角色:扣除银子(银子消耗*作用装备数,0,0,"一键临时符",1)
         for n=1,6 do
             if 玩家数据[id].角色.装备[n] ~= nil  then
 
-            	作用装备数=作用装备数+1
-            	if 取银子(id) < 银子消耗*作用装备数 then
-        					常规提示(id,"银两不足！".."此次强化"..作用装备数.."件装备，".."需要"..银子消耗*作用装备数.."两")
-        					return
-    					end
-     					玩家数据[id].角色:扣除银子(银子消耗*作用装备数,0,0,"一键临时符",1)
 
                 if   玩家数据[id].道具.数据[玩家数据[id].角色.装备[n]]  then
                     local 道具=玩家数据[id].道具.数据[玩家数据[id].角色.装备[n]]

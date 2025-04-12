@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-07-01 11:50:44
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-04-06 15:24:14
+-- @Last Modified time: 2025-04-09 00:06:51
 
 local 角色处理类 = class()
 local jnzbzz = require("script/角色处理类/技能类")
@@ -1071,6 +1071,9 @@ function 角色处理类:添加经验(数额, 类型, 提示)
 			倍率 = 倍率 + 1
 		end
 		if self:取任务(3) ~= 0 then --三倍
+			倍率 = 倍率 + 1
+		end
+		if self:取任务(15) ~= 0 then --回梦丹
 			倍率 = 倍率 + 1
 		end
 		if self.储备灵气 > 0 then
@@ -3150,6 +3153,9 @@ function 角色处理类:添加银子(数额, 说明, 提示)
 		if self:取任务(3) ~= 0 then --三倍
 			倍率=倍率+1
 		end
+		if self:取任务(15) ~= 0 then --回梦丹
+			倍率 = 倍率 + 1
+		end
 	end
 	if 说明 == "宠物仙子新手奖励" or 说明 == "抽奖" or 说明 == "网关充值" or 说明 == "礼包" then
 		倍率 = 1
@@ -3168,7 +3174,7 @@ function 角色处理类:添加储备(数额, 说明, 提示)
 	local 之前银子 = self.储备
 	local 倍率 = 1
 	if self:取任务(15) ~= 0 then --回梦丹
-		倍率 = 倍率 + 0.4
+		倍率 = 倍率 + 1
 	end
 	if 说明 == "宠物仙子新手奖励" or 说明 == "抽奖" or 说明 == "网关充值" or 说明 == "礼包" then
 		倍率 = 1

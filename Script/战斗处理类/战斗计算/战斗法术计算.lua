@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-11-01 04:09:49
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2024-11-13 03:58:05
+-- @Last Modified time: 2025-04-12 19:21:07
 -- @Author: baidwwy
 -- @Date:   2024-08-21 11:47:39
 -- @Last Modified by:   baidwwy
@@ -1163,11 +1163,11 @@ function 战斗法术计算:法攻技能计算1(编号,名称,等级,目标,目�
 
 	if 战斗数据.参战单位[编号].门派~="龙宫" and 战斗数据:取被动(编号,"度厄")==false and 装备特技[名称]==nil then
 		if 战斗数据.参战单位[目标].门派=="天宫" then
-			local gl = 15
+			local gl = 5
 			if 战斗数据.参战单位[目标].法术状态.颠倒五行 then
-				gl = gl + 7
+				gl = gl + 5
 				if 战斗数据.参战单位[目标].法术状态.颠倒五行.增加躲避 then
-					gl = gl + 15
+					gl = gl + 5
 					if gl>=25 then
 						gl = 25
 					end
@@ -1183,9 +1183,9 @@ function 战斗法术计算:法攻技能计算1(编号,名称,等级,目标,目�
 		else
 			local gl = 1
 			if 战斗数据.参战单位[目标].法术状态.颠倒五行 then
-				gl = 8
+				gl = 5
 				if 战斗数据.参战单位[目标].法术状态.颠倒五行.增加躲避 then
-					gl = 16
+					gl = 10
 				end
 			end
 			if 战斗数据.参战单位[目标].软烟罗锦 then

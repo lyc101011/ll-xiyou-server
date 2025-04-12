@@ -1,3 +1,7 @@
+-- @Author: baidwwy
+-- @Date:   2025-04-05 14:26:16
+-- @Last Modified by:   baidwwy
+-- @Last Modified time: 2025-04-11 22:26:30
 --======================================================================--
 -- @作者: GGE研究群: 342119466
 -- @创建时间:   2018-03-03 02:34:19
@@ -30,10 +34,26 @@ function 师门商店类:加载数据()
 		self.环装数据[i]:置对象(环装店数据[i].名称)
 		self.环装数据[i].价格=环装店数据[i].价格
 	end
-	for i=1,#召唤兽店数据 do
-		self.召唤兽数据[i]=宝宝类.创建()
-		self.召唤兽数据[i]:置新对象(召唤兽店数据[i].名称,召唤兽店数据[i].名称,召唤兽店数据[i].类型,nil,召唤兽店数据[i].等级,nil,召唤兽店数据[i].技能,召唤兽店数据[i].资质,召唤兽店数据[i].成长,nil,召唤兽店数据[i].属性)
-		self.召唤兽数据[i].价格=召唤兽店数据[i].价格
+	j = 1
+	local sorted_array = {}
+	for k, v in pairs(Qubaobao) do
+	    table.insert(sorted_array, { key = k, value = v })
+	end
+
+	-- 按 value.score 升序排序
+	table.sort(sorted_array, function(a, b)
+	    return a.value.bbs_1 < b.value.bbs_1
+	end)
+
+	for _,v in pairs(sorted_array) do
+      	if string.find(v.key,  '进阶') or string.find(v.key,  '觉醒') or string.find(v.key,  '超级') or string.find(v.key,  '泡泡') then
+        else
+        	self.召唤兽数据[j]=宝宝类.创建()
+			self.召唤兽数据[j]:置新对象(v.key,v.key,'野生',{100,10,10,10,10,10},0,nil,v.value.bbs_9,{888,888,888,888,888,888,8888},1,v.value.bbs_1)
+			self.召唤兽数据[j].价格=6666
+			j = j + 1
+        end
+
 	end
 end
 

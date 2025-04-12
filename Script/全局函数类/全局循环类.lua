@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-08-21 11:47:38
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-01-09 21:51:10
+-- @Last Modified time: 2025-04-11 21:46:17
 local wstjstime=0 --武神坛
 function 整秒处理(时间)
   if 服务端参数.秒=="00" or 服务端参数.秒=="15" or 服务端参数.秒=="30" or 服务端参数.秒=="45" or 服务端参数.秒=="59" then
@@ -378,7 +378,6 @@ function 输入函数(t)
 			           HDPZ[k]=sadwe[k]
 			end
 		end
-		写出文件([[全局bl.txt]],table.tostring(HDPZ))
 		__S服务:输出("修改爆率成功！")
 	elseif t=="@8882" then --这里是新增
 		local sadwe=table.loadstring(读入文件([[全局新增bl.txt]]))
@@ -386,7 +385,6 @@ function 输入函数(t)
 			HDPZ[k]={}
 			HDPZ[k]=v
 		end
-		写出文件([[全局bl.txt]],table.tostring(HDPZ))
 		__S服务:输出("新增爆率成功")
 	elseif t=="@bcrw" then
 		local llsj={}
