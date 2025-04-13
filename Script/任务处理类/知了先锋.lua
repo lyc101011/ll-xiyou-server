@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-08-19 09:41:53
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2024-09-02 18:48:18
+-- @Last Modified time: 2025-04-13 14:46:28
 local sj = 取随机数
 local format = string.format
 local insert = table.insert
@@ -89,7 +89,7 @@ function 知了先锋:战斗胜利处理(id组,战斗类型,任务id)
         local 银子=qz(等级*160)+16000
         玩家数据[cyid].角色:添加经验(经验,"知了先锋",1)
         玩家数据[cyid].角色:添加银子(qz(银子),"知了先锋",1)
-        玩家数据[cyid].角色:添加储备(qz(银子*0.3),"知了先锋",1)
+        玩家数据[cyid].角色:添加储备(qz(银子*2),"知了先锋",1)
         if  math.random(1,100) < 15  then
             local 链接 = {提示=format("#S(知了先锋)#Y意外惊喜，/%s#Y在知了先锋的战斗中额外获得了",玩家数据[cyid].角色.名称),频道="xt",结尾="#Y一个。#80"}
             local 名称={"金柳露","魔兽要诀","超级金柳露","月华露","五宝盒"}

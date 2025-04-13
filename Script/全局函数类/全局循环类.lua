@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-08-21 11:47:38
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-04-11 21:46:17
+-- @Last Modified time: 2025-04-12 20:55:33
 local wstjstime=0 --武神坛
 function 整秒处理(时间)
   if 服务端参数.秒=="00" or 服务端参数.秒=="15" or 服务端参数.秒=="30" or 服务端参数.秒=="45" or 服务端参数.秒=="59" then
@@ -373,9 +373,9 @@ function 输入函数(t)
 		__S服务:输出("保存玩家数据成功……")
 	elseif t=="@8881" then --这里是改错
 		local sadwe=table.loadstring(读入文件([[全局新增bl.txt]]))
-	            for k,v in pairs(HDPZ) do
+	  for k,v in pairs(HDPZ) do
 			if sadwe[k] then
-			           HDPZ[k]=sadwe[k]
+			   HDPZ[k]=sadwe[k]
 			end
 		end
 		__S服务:输出("修改爆率成功！")

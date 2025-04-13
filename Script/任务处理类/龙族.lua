@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-08-21 11:47:38
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2024-11-10 09:29:52
+-- @Last Modified time: 2025-04-12 20:58:57
 local sj = 取随机数
 local format = string.format
 local insert = table.insert
@@ -90,7 +90,7 @@ function 龙族:战斗胜利处理(id组,战斗类型,任务id)
         local 银子=qz(等级*160)+35000
         玩家数据[cyid].角色:添加经验(经验,"龙族",1)
         玩家数据[cyid].角色:添加银子(qz(银子),"龙族",1)
-        玩家数据[cyid].角色:添加储备(qz(银子*0.2),"龙族",1)
+        玩家数据[cyid].角色:添加储备(qz(银子*2),"龙族",1)
         玩家数据[cyid].角色:添加每日活跃度(cyid, 1)
         if  math.random(1,100) < 10  then
             local 链接 = {提示=format("#S(龙族)#Y意外惊喜，/%s#Y在龙族的战斗中额外获得了",玩家数据[cyid].角色.名称),频道="xt",结尾="#Y一个。#80"}

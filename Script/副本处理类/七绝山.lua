@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-07-01 11:50:43
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-04-11 20:49:41
+-- @Last Modified time: 2025-04-12 19:49:27
 local 副本_七绝山 = class()
 
 function 副本_七绝山:初始化()
@@ -799,7 +799,7 @@ __GWdh222[649]=function (连接id,数字id,序号,内容)
 		        常规提示(数字id,"#Y/恭喜你们完成七绝山副本")
 		    else
 				for n=1,#dw.成员数据 do
-					cid =dw.成员数据.成员数据[n]
+					cid =dw.成员数据[n]
 					玩家数据[cid].角色:取消任务(玩家数据[cid].角色:取任务(640))
 					活动掉落(cid,1038)
 					更新玩家每日(cid,"副本任务","七绝山")
@@ -808,6 +808,7 @@ __GWdh222[649]=function (连接id,数字id,序号,内容)
 					玩家数据[cid].角色:添加每日活跃度(数字id, 5)
 			        常规提示(cid,"#Y/恭喜你们完成七绝山副本")
 				end
+				刷新队伍任务追踪(数字id)
 			end
 
 		end

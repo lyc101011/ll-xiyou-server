@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-11-23 13:32:07
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-04-11 21:46:32
+-- @Last Modified time: 2025-04-13 14:58:30
 -- @Author: baidwwy
 -- @Date:   2024-11-01 04:09:49
 -- @Last Modified by:   baidwwy
@@ -43,9 +43,6 @@ end
 ---------------------------------------------------------------
 __Funfa["钟灵石"]=function(name,hd)
 	return name,1,取随机数(1,3)
-end
-__Funfa["玄灵珠"]=function(name,hd)
-	return 取玄灵珠(),1,取随机数(1,3)
 end
 __Funfa["月华露"]=function(name,hd)
 	return name,取随机数(1,3)
@@ -289,6 +286,13 @@ for k,v in pairs(XZBL) do
 	HDPZ[k]={}
 	HDPZ[k]=v
 end
-
+local sadwe=table.loadstring(读入文件([[全局新增bl.txt]]))
+for k,v in pairs(sadwe) do
+	if sadwe[k] then
+		print(k)
+		HDPZ[k]=sadwe[k]
+	end
+end
+__S服务:输出("修改爆率成功！")
 __S服务:输出("新增爆率成功")
 

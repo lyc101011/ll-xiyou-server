@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-07-01 11:50:44
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-04-09 00:06:51
+-- @Last Modified time: 2025-04-13 01:23:52
 
 local 角色处理类 = class()
 local jnzbzz = require("script/角色处理类/技能类")
@@ -2190,9 +2190,6 @@ function 角色处理类:学习强化技能(连接id, id, 编号) --人物状态
 	if self.强化技能[编号] == nil then
 		常规提示(id, "你没有这样的技能")
 		return
-	elseif self.银子 < 消耗银子 then
-		常规提示(id, "银子不够学习技能")
-		return
 	elseif self.当前经验 < 消耗经验 then
 		常规提示(id, "经验不够学习技能")
 		return
@@ -2200,7 +2197,17 @@ function 角色处理类:学习强化技能(连接id, id, 编号) --人物状态
 		常规提示(id, "该技能等级已达到上限")
 		return
 	end
-	self:扣除银子(消耗银子,0,0,"学习技能")
+	if self.储备 >= 消耗银子 then
+		self.储备 = self.储备 - 消耗银子
+	elseif self.储备 + self.银子 >= 消耗银子 then
+		消耗银子 = 消耗银子 - self.储备
+		self:银子记录()
+		self.银子 = self.银子 - 消耗银子
+		self.储备 = 0
+	else
+		常规提示(id, "你没有那么多的银子")
+		return
+	end
 	self:扣除经验(消耗经验)
 	self.强化技能[编号].学会 = true
 	self.强化技能[编号].等级 = self.强化技能[编号].等级 + 1

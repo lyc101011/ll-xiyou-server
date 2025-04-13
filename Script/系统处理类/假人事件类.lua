@@ -1,7 +1,7 @@
 -- @Author: baidwwy
 -- @Date:   2024-07-01 11:50:44
 -- @Last Modified by:   baidwwy
--- @Last Modified time: 2025-04-06 23:44:38
+-- @Last Modified time: 2025-04-13 13:46:22
 local 假人事件类 = class()
 local insert = table.insert
 自动回收类=require("Script/角色处理类/自动回收类")()
@@ -617,11 +617,11 @@ function 假人事件类:摊位上架(数字id)
 			-- wpsj4:置对象(名称)
 			-- local 临时数据=table.loadstring(table.tostring(wpsj4))
 			local wz = 取装备序列1(名称)
-			玩家数据[数字id].摊位数据.道具[i]=table.copy(装备处理类:生成打造装备假人(数字id,等级*10,wz,名称,"强化打造",玩家数据[数字id].角色.名称.."打造",nil,nil,nil,nil,1))
+			玩家数据[数字id].摊位数据.道具[i]=table.copy(装备处理类:生成打造装备假人(数字id,等级*10,wz,名称,"强化打造",玩家数据[数字id].角色.名称.."打造",nil,nil,nil,nil,1,30000))
 			local rate = 1
 			if wz <= 18 then
 				rate = 1
-			elseif wz == 21 or wz == 24 then
+			elseif wz == 22 or wz == 20 then
 				rate = 4
 			elseif wz > 18 and wz < 26 then
 				rate = 2
